@@ -1,9 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
 export default function App() {
+  const [dataFromServer, setDataFromServer] = useState(null);
   useEffect(() => {
     const socket = io('/'); // Replace with your server URL
+    
+    socket.on('myEvent', (data) => { 
+      setDataFromServer(data);
+    })
     // Socket.io events and logic go here
     
     return () => {
@@ -13,7 +18,10 @@ export default function App() {
 
   return (
     <div>
-      hello react
+      {
+        dataFromServer ? (<p>{ dataFromServer}</p>):(<p>Loading......</p>)
+      }
+      
     </div>
   );
 };
