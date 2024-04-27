@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import io from 'socket.io-client';
 
-function App() {
+export default function App() {
+  useEffect(() => {
+    const socket = io('/'); // Replace with your server URL
+    // Socket.io events and logic go here
+    
+    return () => {
+      socket.disconnect(); // Disconnect socket when component unmounts
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      hello react
     </div>
   );
-}
+};
 
-export default App;
